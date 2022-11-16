@@ -1,55 +1,54 @@
 """
-Script for performing pre-processing of the data.
+Script for converting gmsh files to dolfin format
+using cardiac geometries
 
-This could for example be scripts for generating meshes,
-transforming data to the correct format, cleaning data, etc.
-Typically this could take input from `../data/raw` and output
-some data to `processed_data`
+https://computationalphysiology.github.io/cardiac_geometries/
+
 """
-import json
-from pathlib import Path
+import cardiac_geometries
+import config
+from cardiac_geometries.geometry import Geometry
+from cardiac_geometries.geometry import H5Path
 
-import ap_features as apf
-import numpy as np
-from run_simulation import fitzhugh_nagumo
-from scipy.integrate import solve_ivp
+schema = {
+    "mesh": H5Path(
+        h5group="/mesh",
+        is_mesh=True,
+    ),
+    "ffun": H5Path(
+        h5group="/ffun",
+        is_meshfunction=True,
+        dim=2,
+        mesh_key="mesh",
+    ),
+    "markers": H5Path(
+        h5group="/markers",
+        is_dolfin=False,
+    ),
+}
 
 
-here = Path(__file__).absolute().parent
-datadir = here / ".." / "data"
-datapath = datadir / "data.json"
+def convert_mesh(heart_nr: int) -> None:
+    msh_file = config.get_msh_path(heart_nr=heart_nr)
+    print("Converting 'msh' file to dolfin xdmf format")
+    geometry = cardiac_geometries.gmsh2dolfin(msh_file, unlink=True)
 
-
-def generate_syntetic_data():
-    a = -0.22
-    b = 1.17
-    time = np.arange(0, 1000.0, 1.0)
-
-    res = solve_ivp(
-        fitzhugh_nagumo,
-        [0, 1000.0],
-        [0, 0],
-        args=(a, b),
-        t_eval=time,
+    geo = Geometry(
+        mesh=geometry.mesh,
+        markers=geometry.markers,
+        ffun=geometry.marker_functions.ffun,
+        schema=schema,
     )
+    outfile = config.get_h5_path(heart_nr=heart_nr)
+    geo.save(outfile)
+    print(f"Saved to {outfile}")
 
-    v_all = apf.Beats(y=res.y[0, :], t=time)
-    w_all = apf.Beats(y=res.y[1, :], t=time)
 
-    v = v_all.average_beat()
-    w = w_all.average_beat()
-
-    datapath.write_text(
-        json.dumps(
-            {
-                "t_v": v.t.tolist(),
-                "v": v.y.tolist(),
-                "t_w": w.t.tolist(),
-                "w": w.y.tolist(),
-            },
-        ),
-    )
+def main() -> int:
+    for heart_nr in [1, 2]:
+        convert_mesh(heart_nr)
+    return 0
 
 
 if __name__ == "__main__":
-    generate_syntetic_data()
+    raise SystemExit(main())

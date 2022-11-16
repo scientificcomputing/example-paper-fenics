@@ -1,13 +1,4 @@
-FROM ubuntu:22.04
-
-ENV DEB_PYTHON_INSTALL_LAYOUT=deb_system
-
-# Install pip and git with apt
-RUN apt-get update && \
-    apt-get install -y python3-pip git
-
-# We upgrade pip and setuptools
-RUN python3 -m pip install --no-cache-dir pip setuptools --upgrade
+FROM finsberg/fenics-gmsh
 
 WORKDIR /tmp
 

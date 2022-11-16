@@ -1,8 +1,11 @@
 # Add files here that you don't want to put into docker for example data and the simulation results
-data/*
-code/results/*
-code/figures/*
-
+data/data.tar
+data/mesh
+data/._mesh
+data/*.json
+data/*.h5
+code/results/*.h5
+code/results/*.xdmf
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

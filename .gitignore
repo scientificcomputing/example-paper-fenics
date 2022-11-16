@@ -1,6 +1,11 @@
-code/results
-data/data.txt
-code/figures
+data/data.tar
+data/mesh
+data/._mesh
+data/*.json
+data/*.h5
+code/results/*.h5
+code/results/*.xdmf
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
 

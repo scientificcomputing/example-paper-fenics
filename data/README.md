@@ -1,6 +1,14 @@
 # Data
 
-You can add a README file to explain what the data is, where it is coming from and if the data is not in the repository you could also specify which files are expected to be in this folder
+Data is available in a dropbox folder. Use the script `download_data.sh` to download the data. The data folder should have the following structure after the data is downloaded.
+```
+├── README.md
+├── data.tar
+├── download_data.sh
+└── mesh
+    ├── heart01.msh
+    └── heart02.msh
+```
+These meshes are originally taken from <https://ora.ox.ac.uk/objects/uuid:951b086c-c4ba-41ef-b967-c2106d87ee06>, but since the original data is about 26GB we decided to make a smaller dataset for this example.
 
-In the example repo we have a text file containing synthetic traces to match with the Fitzhugh-Nagumo neural model. These are presented with the [pre-processing script](../code/pre_processing.py)
-¨¨
+Eventually when you publish a paper you could put this data on e.g [Zenodo](https://zenodo.org). That will make sure the data gets it's own DOI.
