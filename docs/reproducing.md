@@ -1,9 +1,13 @@
+(reproducing-main)=
 # Reproducing
-
 
 ## Data
 
-Data is available in a dropbox folder. Use the script `download_data.sh` in the data folder to download the data.
+Data is available in a dropbox folder. Use the script `download_data.sh` in the data folder to download the data, i.e
+```bash
+cd data
+bash download_data.sh
+```
 
 The data folder should have the following structure after the data is downloaded.
 ```
