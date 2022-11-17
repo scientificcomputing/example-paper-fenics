@@ -7,6 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
+    container:
+      image: finsberg/fenics-gmsh:latest
     env:
       # Directory that will be published on github pages
       PUBLISH_DIR: ./docs/_build/html
@@ -20,7 +22,7 @@ jobs:
           python-version: "3.10"
 
       - name: Install dependencies
-        run: python3 -m pip install -r requirements-docs.txt
+        run: python3 -m pip install -r requirements.txt
 
       - name: Build docs
         run: jupyter book build docs

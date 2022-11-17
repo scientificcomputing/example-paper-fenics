@@ -1,11 +1,19 @@
-FROM finsberg/fenics-gmsh
+# Use github pages for docker image
+FROM ghcr.io/jorgensd/research_project_1:v0.1.0
 
-WORKDIR /tmp
+# Create user with a home directory
+ARG NB_USER
+ARG NB_UID=1000
+ENV USER ${NB_USER}
+ENV HOME /home/${NB_USER}
 
-# Copy pyproject.toml first so that we done need to reinstall in case anoter file
-# is changing ater rebuiding docker image
-COPY requirements.txt  .
-RUN python3 -m pip install pip --upgrade && python3 -m pip install --no-cache-dir -r requirements.txt && rm -rf /tmp
+# Copy current directory
+WORKDIR ${HOME}
+COPY . ${HOME}
 
-WORKDIR /app
-COPY . /app
+# Change ownership of home directory
+USER root
+RUN chown -R ${NB_UID} ${HOME}
+
+USER ${NB_USER}
+ENTRYPOINT []
