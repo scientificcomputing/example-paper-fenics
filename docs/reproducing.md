@@ -1,9 +1,44 @@
 # Reproducing
 
-Add steps here on how to reproduce the results.
 
 ## Data
-How to get hold on the data
+
+Data is available in a dropbox folder. Use the script `download_data.sh` in the data folder to download the data.
+
+The data folder should have the following structure after the data is downloaded.
+```
+├── README.md
+├── data.tar
+├── download_data.sh
+└── mesh
+    ├── heart01.msh
+    └── heart02.msh
+```
+These meshes are originally taken from <https://ora.ox.ac.uk/objects/uuid:951b086c-c4ba-41ef-b967-c2106d87ee06>, but since the original data is about 26GB we decided to make a smaller dataset for this example.
+
+Eventually when you publish a paper you could put this data on e.g [Zenodo](https://zenodo.org). That will make sure the data gets it's own DOI.
+
 
 ## Scripts
-Which scripts to run
+All the scripts are located in the folder called `code` in the repository. Is is assumed that you run the script from within this folder.
+
+### Pre-processing
+In order to reproduce the results you need to first run the pre-processing script
+```
+python3 pre_processing.py
+```
+This will convert the meshes from Gmsh to a dolfin format.
+
+### Fiber generation
+The next step is to run the fiber generation. You can do this by running the script
+```
+python3 run_fiber_generation.py
+```
+This will create a new folder `code/results` containing files called `microstructure_<heart_nr>.h5`.
+
+### Postprocessing
+The final step is to postprocess the results by running the script
+```
+python3 postprocess.py
+```
+This will generate a file for visualizing the fibers in the Paraview (inside `code/results` called  `fiber_<heart_nr>.xdmf`). This script will also compare some features computed from the fibers with the results published in the (artificial) paper. If the results differ, then the program will raise an error.

@@ -4,14 +4,16 @@ algorithm
 
 https://finsberg.github.io/ldrb/
 """
+from pathlib import Path
+
 import config
 import dolfin
 import ldrb
 from cardiac_geometries.geometry import Geometry
 
 
-def generate_fibers(heart_nr: int) -> None:
-    outfile = config.get_h5_path(heart_nr=heart_nr)
+def generate_fibers(outfile: Path, microstructure_path: Path) -> None:
+
     geo = Geometry.from_file(outfile, schema_path=outfile.with_suffix(".json"))
 
     # Markers are a dictionary with values [marker, dim]
@@ -35,7 +37,6 @@ def generate_fibers(heart_nr: int) -> None:
         beta_epi_lv=0,  # Sheet angle on the epicardium
     )
 
-    microstructure_path = config.get_results_path(heart_nr=heart_nr)
     with dolfin.HDF5File(
         geo.mesh.mpi_comm(),
         microstructure_path.as_posix(),
@@ -45,10 +46,14 @@ def generate_fibers(heart_nr: int) -> None:
         h5file.write(s0, "s0")
         h5file.write(n0, "n0")
 
+    print(f"Microstructure saved to {microstructure_path}")
+
 
 def main() -> int:
     for heart_nr in [1, 2]:
-        generate_fibers(heart_nr=heart_nr)
+        outfile = config.get_h5_path(heart_nr=heart_nr)
+        microstructure_path = config.get_results_path(heart_nr=heart_nr)
+        generate_fibers(outfile=outfile, microstructure_path=microstructure_path)
     return 0
 
 

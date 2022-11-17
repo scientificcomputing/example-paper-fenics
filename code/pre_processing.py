@@ -5,6 +5,9 @@ using cardiac geometries
 https://computationalphysiology.github.io/cardiac_geometries/
 
 """
+import typing
+from pathlib import Path
+
 import cardiac_geometries
 import config
 from cardiac_geometries.geometry import Geometry
@@ -28,8 +31,11 @@ schema = {
 }
 
 
-def convert_mesh(heart_nr: int) -> None:
-    msh_file = config.get_msh_path(heart_nr=heart_nr)
+def convert_mesh(
+    msh_file: typing.Union[Path, str],
+    outfile: typing.Union[Path, str],
+) -> None:
+
     print("Converting 'msh' file to dolfin xdmf format")
     geometry = cardiac_geometries.gmsh2dolfin(msh_file, unlink=True)
 
@@ -39,14 +45,16 @@ def convert_mesh(heart_nr: int) -> None:
         ffun=geometry.marker_functions.ffun,
         schema=schema,
     )
-    outfile = config.get_h5_path(heart_nr=heart_nr)
+
     geo.save(outfile)
     print(f"Saved to {outfile}")
 
 
 def main() -> int:
     for heart_nr in [1, 2]:
-        convert_mesh(heart_nr)
+        msh_file = config.get_msh_path(heart_nr=heart_nr)
+        outfile = config.get_h5_path(heart_nr=heart_nr)
+        convert_mesh(msh_file=msh_file, outfile=outfile)
     return 0
 
 
