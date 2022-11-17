@@ -44,6 +44,7 @@ ipython-genutils==0.2.0
 ipywidgets==7.7.2
 jedi==0.18.1
 Jinja2==3.1.2
+json5==0.9.10
 jsonschema==3.2.0
 jupyter==1.0.0
 jupyter-book==0.13.1
@@ -54,8 +55,10 @@ jupyter-server-mathjax==0.2.6
 jupyter-sphinx==0.3.2
 jupyter_client==7.4.7
 jupyter_core==5.0.0
+jupyterlab==3.5.0
 jupyterlab-pygments==0.2.2
 jupyterlab-widgets==1.1.1
+jupyterlab_server==2.16.3
 kiwisolver==1.4.4
 latexcodec==2.0.1
 ldrb==2022.5.0
@@ -147,6 +150,7 @@ stack-data==0.6.1
 sympy==1.10.1
 terminado==0.17.0
 tinycss2==1.2.1
+tomli==2.0.1
 tornado==6.2
 traitlets==5.5.0
 uc-micro-py==1.0.1
