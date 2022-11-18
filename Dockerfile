@@ -16,4 +16,7 @@ USER root
 RUN chown -R ${NB_UID} ${HOME}
 
 USER ${NB_USER}
+
+ENV PYTHONPATH /repo/example-paper-fenics/code:${PYTHONPATH}
+
 ENTRYPOINT []
