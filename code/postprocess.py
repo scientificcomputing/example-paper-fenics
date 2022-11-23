@@ -1,12 +1,24 @@
-"""Script for converting file """
+"""
+Script for converting file
+
+SPDX-License-Identifier:    MIT
+"""
 import json
+import logging
+import sys
 import typing
 from pathlib import Path
 
 import config
 import dolfin
-from cardiac_geometries.geometry import Geometry
-from cardiac_geometries.geometry import load_microstructure
+import numpy as np
+from cardiac_geometries.geometry import Geometry, load_microstructure
+
+logger = logging.Logger(__name__, logging.INFO)
+ch = logging.StreamHandler(sys.stdout)
+FORMAT = '%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s'
+ch.setFormatter(logging.Formatter(FORMAT))
+logger.addHandler(ch)
 
 
 def generate_fiber_xdmf_file(
@@ -17,17 +29,17 @@ def generate_fiber_xdmf_file(
 
     geo = Geometry.from_file(outfile, schema_path=outfile.with_suffix(".json"))
 
-    f0, s0, n0 = load_microstructure(
+    f0, _, _ = load_microstructure(
         mesh=geo.mesh,
         microstructure_path=microstructure_path,
     )
 
-    # Save fibers to a file that can be visualized in paraview
+    # Save fibers to a file that can be visualized in Paraview
 
     with dolfin.XDMFFile(fiber_path.as_posix()) as f:
         f.write(f0)
 
-    print(f"Saved fibers to {fiber_path}")
+    logger.info(f"Saved fibers to {fiber_path}")
     # Compute some features. This could be some results presented in the paper
 
     return {
@@ -39,11 +51,28 @@ def generate_fiber_xdmf_file(
     }
 
 
-def check_results(features_path: Path, features):
-    expected_feautres = json.loads(features_path.read_text())
-    print("Checking reproducibility")
-    assert expected_feautres == features
-    print("Results are reproducible!")
+def check_results(features_path: Path, features: dict):
+    """
+    Check if data from input file `features_path` matches input features
+
+    Args:
+        features_path (Path): Path to reference results
+        features (dict): Results generated from current simulation
+    """
+    expected_features = json.loads(features_path.read_text())
+    logger.info("Checking reproducibility")
+    reproducible = True
+    # Check each (key, value) pair in the features and check they are
+    # within machine precision
+    for key in expected_features.keys():
+        if not np.isclose(expected_features[key], features[key]):
+            logger.error(f"{key}: {expected_features[key]}!={features[key]}")
+            reproducible = False
+
+    if reproducible:
+        logger.info("Results are reproducible")
+    else:
+        raise RuntimeError("Results are not reproducible")
 
 
 def main() -> int:

@@ -35,6 +35,7 @@ parse:
 sphinx:
   config:
     bibtex_bibfiles: ["refs.bib"]
+    suppress_warnings: ["bibtex.duplicate_citation"] # If the same paper is cited in multiple files
 
   extra_extensions:
   - 'sphinx.ext.autodoc'
