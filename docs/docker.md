@@ -1,4 +1,4 @@
-## Running in Docker
+# Running in Docker
 
 We have created a docker image containing all the dependencies as well as the source code in the repository. To get the most recent version of the docker image, make sure to pull the latest image first
 ```bash

@@ -1,17 +1,26 @@
 """
-Script for converting gmsh files to dolfin format
+Script for converting GMSH files to Dolfin format
 using cardiac geometries
 
 https://computationalphysiology.github.io/cardiac_geometries/
 
+SPDX-License-Identifier:    MIT
 """
 import typing
 from pathlib import Path
-
+import logging
 import cardiac_geometries
 import config
 from cardiac_geometries.geometry import Geometry
 from cardiac_geometries.geometry import H5Path
+import sys
+
+# We set default log level to be info
+logger = logging.Logger("Preprocessing", level=logging.INFO)
+logger.addHandler(logging.StreamHandler(sys.stdout))
+# Mute FFC and UFL errors at this stage
+logging.getLogger('FFC').setLevel(logging.WARNING)
+logging.getLogger('UFL').setLevel(logging.WARNING)
 
 schema = {
     "mesh": H5Path(
@@ -35,10 +44,15 @@ def convert_mesh(
     msh_file: typing.Union[Path, str],
     outfile: typing.Union[Path, str],
 ) -> None:
+    """
+    Convert an .msh file to DOLFIN h5 format
 
-    print("Converting 'msh' file to dolfin xdmf format")
+    Args:
+        msh_file (typing.Union[Path, str]): Path to input mesh (.msh extension)
+        outfile (typing.Union[Path, str]): Path to outfile (.h5 extension)
+    """
     geometry = cardiac_geometries.gmsh2dolfin(msh_file, unlink=True)
-
+    logger.info(f"Converting {msh_file}")
     geo = Geometry(
         mesh=geometry.mesh,
         markers=geometry.markers,
@@ -47,10 +61,16 @@ def convert_mesh(
     )
 
     geo.save(outfile)
-    print(f"Saved to {outfile}")
+    logger.info(f"Saved to {outfile}")
 
 
 def main() -> int:
+    """
+    Convert meshes from `../data/mesh/heart0*.msh` to `../data/heart_0*.h5`
+
+    Returns:
+        int: 0 if code runs as expected
+    """
     for heart_nr in [1, 2]:
         msh_file = config.get_msh_path(heart_nr=heart_nr)
         outfile = config.get_h5_path(heart_nr=heart_nr)
