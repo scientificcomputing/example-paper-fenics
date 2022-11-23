@@ -16,11 +16,11 @@ from cardiac_geometries.geometry import H5Path
 import sys
 
 # We set default log level to be info
-logger = logging.Logger("Preprocessing", level=logging.INFO)
-logger.addHandler(logging.StreamHandler(sys.stdout))
-# Mute FFC and UFL errors at this stage
-logging.getLogger('FFC').setLevel(logging.WARNING)
-logging.getLogger('UFL').setLevel(logging.WARNING)
+logger = logging.Logger(__name__, logging.INFO)
+ch = logging.StreamHandler(sys.stdout)
+FORMAT = '%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s'
+ch.setFormatter(logging.Formatter(FORMAT))
+logger.addHandler(ch)
 
 schema = {
     "mesh": H5Path(

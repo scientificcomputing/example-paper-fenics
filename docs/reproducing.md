@@ -3,7 +3,7 @@
 
 ## Data
 
-Data is available in a dropbox folder. Use the script `download_data.sh` in the data folder to download the data, i.e
+Data is available in a Dropbox folder. Use the script `download_data.sh` in the data folder to download the data, i.e
 ```bash
 cd data
 bash download_data.sh
@@ -18,9 +18,9 @@ The data folder should have the following structure after the data is downloaded
     ├── heart01.msh
     └── heart02.msh
 ```
-These meshes are originally taken from <https://ora.ox.ac.uk/objects/uuid:951b086c-c4ba-41ef-b967-c2106d87ee06>, but since the original data is about 26GB we decided to make a smaller dataset for this example.
+These meshes are originally taken from {cite}`martinez2019repository`, but since the original data is about 26GB we decided to make a smaller dataset for this example.
 
-Eventually when you publish a paper you could put this data on e.g [Zenodo](https://zenodo.org). That will make sure the data gets it's own DOI.
+Eventually when you publish a paper you could put this data on e.g [Zenodo](https://zenodo.org). That will make sure the data gets it's own [Digital Object Identifier](https://www.doi.org/) (DOI).
 
 
 ## Scripts
@@ -31,7 +31,7 @@ In order to reproduce the results you need to first run the pre-processing scrip
 ```
 python3 pre_processing.py
 ```
-This will convert the meshes from Gmsh to a dolfin format.
+This will convert the meshes from Gmsh to a Dolfin format.
 
 ### Fiber generation
 The next step is to run the fiber generation. You can do this by running the script
@@ -46,3 +46,7 @@ The final step is to postprocess the results by running the script
 python3 postprocess.py
 ```
 This will generate a file for visualizing the fibers in the Paraview (inside `code/results` called  `fiber_<heart_nr>.xdmf`). This script will also compare some features computed from the fibers with the results published in the (artificial) paper. If the results differ, then the program will raise an error.
+
+```{bibliography}
+:filter: docname in docnames
+```

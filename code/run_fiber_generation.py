@@ -3,13 +3,23 @@ Script for generating fiber orientations using the LDRB
 algorithm
 
 https://finsberg.github.io/ldrb/
+
+SPDX-License-Identifier:    MIT
 """
+import logging
+import sys
 from pathlib import Path
 
 import config
 import dolfin
 import ldrb
 from cardiac_geometries.geometry import Geometry
+
+logger = logging.Logger(__name__, logging.INFO)
+ch = logging.StreamHandler(sys.stdout)
+FORMAT = '%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s'
+ch.setFormatter(logging.Formatter(FORMAT))
+logger.addHandler(ch)
 
 
 def generate_fibers(outfile: Path, microstructure_path: Path) -> None:
@@ -46,7 +56,7 @@ def generate_fibers(outfile: Path, microstructure_path: Path) -> None:
         h5file.write(s0, "s0")
         h5file.write(n0, "n0")
 
-    print(f"Microstructure saved to {microstructure_path}")
+    logger.info(f"Microstructure saved to {microstructure_path}")
 
 
 def main() -> int:
