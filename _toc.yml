@@ -1,0 +1,9 @@
+format: jb-book
+root: index
+
+chapters:
+  - file: docs/abstract
+  - file: docs/reproducing
+  - file: docs/docker
+  - file: code/demo
+  - file: docs/citation

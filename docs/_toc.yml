@@ -1,9 +1,0 @@
-format: jb-book
-root: index
-
-chapters:
-  - file: abstract
-  - file: reproducing
-  - file: docker
-  - file: demo
-  - file: citation
