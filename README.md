@@ -1,5 +1,5 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/scientificcomputing/example-paper-fenics/gh-pages?urlpath=lab/tree/_sources/demo.ipynb)
 # Supplementary code for the paper: Title of paper
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/scientificcomputing/example-paper-fenics/main?labpath=code%2Fdemo.ipynb)
 
 This repository contains supplementary code for the paper
 > Finsberg, H., Dokken, J. 2022.
