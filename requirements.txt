@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements.txt pyproject.toml
 #
-cardiac-geometries==0.3.11
+cardiac-geometries==0.11.0
     # via my-paper (pyproject.toml)
 certifi==2023.7.22
     # via requests

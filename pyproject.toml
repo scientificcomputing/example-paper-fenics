@@ -8,7 +8,7 @@ classifiers = ["Private :: Do Not Upload"]
 version = "0"
 dependencies = [
     "h5py==3.9.0",  # Pin to same version that is allready installed in the docker image
-    "cardiac-geometries",
+    "cardiac-geometries>=0.11.0",
     "ldrb",
     "requests",
     "tqdm",
