@@ -17,13 +17,12 @@ from cardiac_geometries.geometry import Geometry
 
 logger = logging.Logger(__name__, logging.INFO)
 ch = logging.StreamHandler(sys.stdout)
-FORMAT = '%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s'
+FORMAT = "%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s"
 ch.setFormatter(logging.Formatter(FORMAT))
 logger.addHandler(ch)
 
 
 def generate_fibers(outfile: Path, microstructure_path: Path) -> None:
-
     geo = Geometry.from_file(outfile, schema_path=outfile.with_suffix(".json"))
 
     # Markers are a dictionary with values [marker, dim]

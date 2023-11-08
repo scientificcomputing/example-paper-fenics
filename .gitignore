@@ -1,10 +1,9 @@
-data/data.tar
-data/mesh
-data/._mesh
-data/*.json
-data/*.h5
-code/results/*.h5
-code/results/*.xdmf
+data.tar
+mesh
+._mesh
+*.json
+*.h5
+*.xdmf
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode

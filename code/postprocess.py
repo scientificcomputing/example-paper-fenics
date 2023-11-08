@@ -16,7 +16,7 @@ from cardiac_geometries.geometry import Geometry, load_microstructure
 
 logger = logging.Logger(__name__, logging.INFO)
 ch = logging.StreamHandler(sys.stdout)
-FORMAT = '%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s'
+FORMAT = "%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s"
 ch.setFormatter(logging.Formatter(FORMAT))
 logger.addHandler(ch)
 
@@ -26,7 +26,6 @@ def generate_fiber_xdmf_file(
     microstructure_path: Path,
     fiber_path: Path,
 ) -> typing.Dict[str, float]:
-
     geo = Geometry.from_file(outfile, schema_path=outfile.with_suffix(".json"))
 
     f0, _, _ = load_microstructure(

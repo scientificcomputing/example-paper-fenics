@@ -31,7 +31,7 @@ In order to reproduce the results you need to first run the pre-processing scrip
 ```
 python3 pre_processing.py
 ```
-This will convert the meshes from Gmsh to a Dolfin format.
+This will convert the meshes from Gmsh to a dolfin format.
 
 ### Fiber generation
 The next step is to run the fiber generation. You can do this by running the script
