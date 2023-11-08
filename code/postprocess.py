@@ -64,7 +64,7 @@ def check_results(features_path: Path, features: dict):
     # Check each (key, value) pair in the features and check they are
     # within machine precision
     for key in expected_features.keys():
-        if not np.isclose(expected_features[key], features[key]):
+        if not np.isclose(expected_features[key], features[key], rtol=1e-8):
             logger.error(f"{key}: {expected_features[key]}!={features[key]}")
             reproducible = False
 
