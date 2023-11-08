@@ -1,10 +1,11 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Example FEniCS paper
-author: Henrik Finsberg
+title: Example paper FEniCS
+author: Henrik Finsberg and Jørgen Dokken
 logo: "docs/logo.png"
-copyright: "2022"
+copyright: "2023"
+only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -14,12 +15,11 @@ execute:
 # Information about where the book exists on the web
 repository:
   url: https://github.com/scientificcomputing/example-paper-fenics # Online location of your book
-  branch: main
+  branch: main  # Which branch of the repository should be used when creating links (optional)
 
 launch_buttons:
   notebook_interface: "jupyterlab" # The interface interactive links will activate ["classic", "jupyterlab"]
   binderhub_url: "https://mybinder.org"
-  thebe: true
 
 html:
   use_issues_button: true
@@ -31,13 +31,25 @@ parse:
     - dollarmath
     - linkify
 
+
 sphinx:
   config:
     bibtex_bibfiles: ["docs/refs.bib"]
     suppress_warnings: ["bibtex.duplicate_citation"] # If the same paper is cited in multiple files
+    nb_execution_show_tb: True
+    html_theme_options:
+      navigation_with_keys: false
+    html_last_updated_fmt: "%b %d, %Y"
+    nb_custom_formats:  # https://jupyterbook.org/en/stable/file-types/jupytext.html#file-types-custom
+        .py:
+            - jupytext.reads
+            - fmt: py
 
   extra_extensions:
   - 'sphinx.ext.autodoc'
   - 'sphinx.ext.napoleon'
   - 'sphinx.ext.viewcode'
   - "sphinxcontrib.bibtex"
+
+
+exclude_patterns: [".pytest_cache/*", ".github/*"]

@@ -18,7 +18,7 @@ import sys
 # We set default log level to be info
 logger = logging.Logger(__name__, logging.INFO)
 ch = logging.StreamHandler(sys.stdout)
-FORMAT = '%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s'
+FORMAT = "%(levelname)-5s [%(filename)s:%(lineno)d] %(message)s"
 ch.setFormatter(logging.Formatter(FORMAT))
 logger.addHandler(ch)
 

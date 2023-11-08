@@ -1,4 +1,4 @@
-FROM finsberg/fenics-gmsh
+FROM ghcr.io/scientificcomputing/fenics-gmsh:2023-08-16
 
 ARG REPO_BRANCH="main"
 

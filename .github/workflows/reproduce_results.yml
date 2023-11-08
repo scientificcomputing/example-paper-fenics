@@ -1,0 +1,56 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Reproduce results
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+    # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  workflow_call:
+
+
+jobs:
+  run:
+    runs-on: ubuntu-22.04
+    container:
+      image: ghcr.io/scientificcomputing/fenics-gmsh:2023-08-16
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+          key: cache_v1
+          restore-keys: |
+            cache_v1
+
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Download data
+        run: cd data && bash download_data.sh && cd ..
+
+      - name: Run pre-processing
+        run: cd code && python3 pre_processing.py && cd ..
+
+      - name: Run simulation
+        run: cd code && python3 run_fiber_generation.py && cd ..
+
+      - name: Postprocess
+        run: cd code && python3 postprocess.py && cd ..
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          path: |
+            ./data/mesh
+            ./code/results
+          if-no-files-found: error
