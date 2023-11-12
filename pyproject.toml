@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "my-paper"
 classifiers = ["Private :: Do Not Upload"]
-version = "0"
+version = "0.2.0"
 dependencies = [
     "h5py==3.9.0",  # Pin to same version that is allready installed in the docker image
     "cardiac-geometries>=0.11.0",
@@ -19,6 +19,7 @@ dependencies = [
 dev = [
     "pdbpp",
     "pre-commit",
+    "bump-my-version",
 ]
 docs = [
     "jupyter-book",
@@ -71,3 +72,24 @@ target-version = "py310"
 [tool.ruff.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
+
+
+[tool.bumpversion]
+allow_dirty = false
+commit = true
+message = "Bump version: {current_version} → {new_version}"
+tag = true
+sign_tags = false
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+current_version = "0.2.0"
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
+serialize = [
+    "{major}.{minor}.{patch}"
+]
+search = "version = {current_version}"
+replace = "version = {new_version}"
+
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
