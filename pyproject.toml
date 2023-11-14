@@ -1,10 +1,9 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "my-paper"
-classifiers = ["Private :: Do Not Upload"]
+name = "my-fenics-paper"
 version = "0.2.0"
 dependencies = [
     "h5py==3.9.0",  # Pin to same version that is allready installed in the docker image
