@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "my-fenics-paper"
 version = "0.4.0"
 dependencies = [
-    "h5py",
+    "h5py==3.10.0",               # Same as in docker image to avoid compilation issues with HDF5
     "cardiac-geometries>=0.11.0",
     "ldrb",
     "requests",
