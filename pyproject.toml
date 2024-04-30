@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "my-fenics-paper"
 version = "0.4.0"
 dependencies = [
-    "h5py==3.9.0",                # Pin to same version that is allready installed in the docker image
+    "h5py",
     "cardiac-geometries>=0.11.0",
     "ldrb",
     "requests",

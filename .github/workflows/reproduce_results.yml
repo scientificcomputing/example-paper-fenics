@@ -16,7 +16,7 @@ jobs:
   run:
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/scientificcomputing/fenics-gmsh:2023-08-16
+      image: ghcr.io/scientificcomputing/fenics-gmsh:2024-02-19
 
     steps:
       - uses: actions/checkout@v4

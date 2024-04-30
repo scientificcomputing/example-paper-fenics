@@ -22,7 +22,7 @@ babel==2.13.1
 beautifulsoup4==4.12.2
     # via pydata-sphinx-theme
 cardiac-geometries==0.11.0
-    # via my-paper (pyproject.toml)
+    # via my-fenics-paper (pyproject.toml)
 certifi==2023.7.22
     # via requests
 charset-normalizer==3.3.2
@@ -56,10 +56,10 @@ fastjsonschema==2.18.1
     # via nbformat
 greenlet==3.0.1
     # via sqlalchemy
-h5py==3.9.0
+h5py==3.10.0
     # via
     #   ldrb
-    #   my-paper (pyproject.toml)
+    #   my-fenics-paper (pyproject.toml)
 idna==3.4
     # via requests
 imagesize==1.4.1
@@ -88,7 +88,7 @@ jsonschema==4.19.2
 jsonschema-specifications==2023.7.1
     # via jsonschema
 jupyter-book==0.15.1
-    # via my-paper (pyproject.toml)
+    # via my-fenics-paper (pyproject.toml)
 jupyter-cache==0.6.1
     # via myst-nb
 jupyter-client==8.6.0
@@ -102,11 +102,11 @@ jupyter-core==5.5.0
     #   nbclient
     #   nbformat
 jupytext==1.15.2
-    # via my-paper (pyproject.toml)
+    # via my-fenics-paper (pyproject.toml)
 latexcodec==2.0.1
     # via pybtex
 ldrb==2023.4.0
-    # via my-paper (pyproject.toml)
+    # via my-fenics-paper (pyproject.toml)
 linkify-it-py==2.0.2
     # via jupyter-book
 llvmlite==0.40.1
@@ -211,7 +211,7 @@ referencing==0.30.2
     #   jsonschema-specifications
 requests==2.31.0
     # via
-    #   my-paper (pyproject.toml)
+    #   my-fenics-paper (pyproject.toml)
     #   sphinx
 rich==13.6.0
     # via
@@ -277,7 +277,7 @@ sphinxcontrib-applehelp==1.0.7
 sphinxcontrib-bibtex==2.5.0
     # via
     #   jupyter-book
-    #   my-paper (pyproject.toml)
+    #   my-fenics-paper (pyproject.toml)
 sphinxcontrib-devhelp==1.0.5
     # via sphinx
 sphinxcontrib-htmlhelp==2.0.4
@@ -301,7 +301,7 @@ tornado==6.3.3
     #   ipykernel
     #   jupyter-client
 tqdm==4.66.1
-    # via my-paper (pyproject.toml)
+    # via my-fenics-paper (pyproject.toml)
 traitlets==5.13.0
     # via
     #   comm
