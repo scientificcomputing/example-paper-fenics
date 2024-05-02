@@ -48,6 +48,7 @@ jobs:
         run: python3 code/postprocess.py
 
       - name: Upload artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           path: |
