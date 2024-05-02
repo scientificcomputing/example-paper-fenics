@@ -23,6 +23,7 @@ jobs:
     uses: ./.github/workflows/build_docs.yml
 
   build:
+    needs: build-docs
     runs-on: ubuntu-22.04
     environment:
       name: github-pages
