@@ -1,5 +1,5 @@
 # Use github pages for docker image
-FROM ghcr.io/scientificcomputing/example-paper-fenics:v0.1.6
+FROM ghcr.io/scientificcomputing/example-paper-fenics:v0.3.0
 
 # Create user with a home directory
 ARG NB_USER
