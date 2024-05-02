@@ -35,16 +35,17 @@ jobs:
         run: python3 -m pip install -r requirements.txt
 
       - name: Download data
-        run: cd data && bash download_data.sh && cd ..
+        run: bash download_data.sh
+        working-directory: data
 
       - name: Run pre-processing
-        run: cd code && python3 pre_processing.py && cd ..
+        run: python3 code/pre_processing.py
 
       - name: Run simulation
-        run: cd code && python3 run_fiber_generation.py && cd ..
+        run: python3 code/run_fiber_generation.py
 
       - name: Postprocess
-        run: cd code && python3 postprocess.py && cd ..
+        run: python3 code/postprocess.py
 
       - name: Upload artifact
         if: always()
